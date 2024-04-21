@@ -7,13 +7,16 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Scheduled_class {
     @Id
+    private int class_id;
     private String batch,day_of_week;
-    
     private int start,end;
     @ManyToOne
     private Subjects topic;
     @ManyToOne
     private Faculty teacher;
+    public void setclass_id(int id){
+        this.class_id=id;
+    }
     public void setteacher(Faculty t){
         this.teacher=t;
     }

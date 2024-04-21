@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -12,7 +13,7 @@ public class Faculty {
     private String name;
     @Id
     private int faculty_id;
-    @OneToMany()
+    @OneToMany(mappedBy = "teacher",fetch = FetchType.EAGER)
     private List<Scheduled_class> class_list=new ArrayList<Scheduled_class>();
     // getter and setter methods for the member variables
     public void setfaculty_id(int a){
@@ -24,10 +25,15 @@ public class Faculty {
     public void setclass_list(Scheduled_class c){
         class_list.add(c);
     }
-    public int getfaculty_id(int a){
+    public void setclass_list(List<Scheduled_class> c){
+        for(Scheduled_class i:c){
+            class_list.add(i);
+        }
+    }
+    public int getfaculty_id(){
         return this.faculty_id;
     }
-    public String getname(String name){
+    public String getname(){
         return this.name;
     }
     public List<Scheduled_class> getclass_list(){
