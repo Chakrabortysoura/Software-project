@@ -17,6 +17,9 @@ public class Scheduled_class {
     public void setclass_id(int id){
         this.class_id=id;
     }
+    public int getclass_id(){
+        return this.class_id;
+    }
     public void setteacher(Faculty t){
         this.teacher=t;
     }
