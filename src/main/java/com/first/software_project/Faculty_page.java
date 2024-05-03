@@ -9,10 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -105,22 +104,29 @@ public class Faculty_page {
         
         return true;
     }
-
+    @RequestMapping("/")
+    public String login(){
+        System.out.println("This is the login page.");
+        return "login";
+    }
     @RequestMapping("/faculty_home_page")
-    public String faculty_home(@RequestParam("id") int teacher_id,@RequestParam("day") String day_of_week,HttpSession session){
-        //search for all the classes for the faculty on that day
+    public String faculty_home(@RequestParam("id") int teacher_id,@RequestParam("day") String day_of_week,Model m){
         Faculty teacher=search_faculty(teacher_id);
+        //search for all the classes for the faculty on that day
+        // and get the teachers details from searching by the teacher's id
         List<Scheduled_class> today_classes=class_on_specific_day(teacher, day_of_week);
-        session.setAttribute("day_of_week", day_of_week);
-        session.setAttribute("faculty_details", teacher);
-        session.setAttribute("class_list", today_classes);
+        day_of_week=day_of_week.substring(0,3);
+        m.addAttribute("day_of_week", day_of_week);
+        m.addAttribute("faculty_details", teacher);
+        m.addAttribute("class_list", today_classes);
 
         // check how many of the classes have already assigned classrooms
-        int date=12;
+        
+        System.out.println(today_classes.size());
 
         return "faculty_home";
     }
-    public static void main(String args[]){
+    // public static void main(String args[]){
 
     //     Scanner scn=new Scanner(System.in);
     //     Faculty result=search_faculty(1);
@@ -146,14 +152,14 @@ public class Faculty_page {
     //         System.out.println("The allocation was not successful");
     //     }
     //     scn.close();
-        Scheduled_class class2=new Scheduled_class();
-		class2.setclass_id(2);
+        // Scheduled_class class2=new Scheduled_class();
+		// class2.setclass_id(2);
 		
-        if(check_allocated_or_not(class2, 20)){
-            System.out.println("The class was assigned.");
-        }
-        else{
-            System.out.println("The class is still not assigned with any clasroom.");
-        }
-    }
+        // if(check_allocated_or_not(class2, 20)){
+        //     System.out.println("The class was assigned.");
+        // }
+        // else{
+        //     System.out.println("The class is still not assigned with any clasroom.");
+        // }
+    // }
 }

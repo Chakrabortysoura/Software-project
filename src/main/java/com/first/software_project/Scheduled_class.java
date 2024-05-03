@@ -1,6 +1,7 @@
 package com.first.software_project;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
@@ -10,7 +11,7 @@ public class Scheduled_class {
     private int class_id;
     private String batch,day_of_week;
     private int start,end;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Subjects topic;
     @ManyToOne
     private Faculty teacher;
