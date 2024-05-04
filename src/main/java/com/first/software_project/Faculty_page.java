@@ -110,20 +110,31 @@ public class Faculty_page {
         return "login";
     }
     @RequestMapping("/faculty_home_page")
-    public String faculty_home(@RequestParam("id") int teacher_id,@RequestParam("day") String day_of_week,Model m){
+    public String faculty_home(@RequestParam("id") int teacher_id,@RequestParam("day") String day_of_week,HttpSession s1){
+        
         Faculty teacher=search_faculty(teacher_id);
         //search for all the classes for the faculty on that day
         // and get the teachers details from searching by the teacher's id
+        
         List<Scheduled_class> today_classes=class_on_specific_day(teacher, day_of_week);
         day_of_week=day_of_week.substring(0,3);
-        m.addAttribute("day_of_week", day_of_week);
-        m.addAttribute("faculty_details", teacher);
-        m.addAttribute("class_list", today_classes);
 
-        // check how many of the classes have already assigned classrooms
+        //set all this data after being fetched in the session object
+        s1.setAttribute("day_of_week", day_of_week);
+        s1.setAttribute("faculty_details", teacher);
+        s1.setAttribute("class_list", today_classes);
         
-        System.out.println(today_classes.size());
-
+        // check how many of the classes have already assigned classrooms
+        allocation_done[] checklist=new allocation_done[today_classes.size()];
+        for(int i=0;i<today_classes.size();i++){
+            checklist[i]=new allocation_done();
+            if(check_allocated_or_not(today_classes.get(i), 20)){
+                checklist[i].setallocation_done();
+            }
+        }
+        //saving the checklist in the session object
+        s1.setAttribute("allocation_checklist", checklist);
+        
         return "faculty_home";
     }
     // public static void main(String args[]){
