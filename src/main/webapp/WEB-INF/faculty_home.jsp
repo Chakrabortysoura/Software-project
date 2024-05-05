@@ -34,15 +34,21 @@ pageEncoding="UTF-8"%>
             for(int i=0;i<list.size();i++){
         %>
         <div style="border: 2px solid brown;height: 140px; border-radius: 8px; display: inline-block; width: 25%; text-align: center; padding-top: 52px; background-color: rgb(255, 187, 153);">
-            Batch: <%=(list.get(0).getbatch()) %>
-            <br>Topic: <%=list.get(0).gettopic().getsubject_name() %>
-            <br>Starting time: <%=list.get(0).getstart() %>
-            <br>End time: <%=list.get(0).getend() %>
+            Batch: <%=(list.get(i).getbatch()) %>
+            <br>Topic: <%=list.get(i).gettopic().getsubject_name() %>
+            <br>Starting time: <%=list.get(i).getstart() %>
+            <br>End time: <%=list.get(i).getend() %>
             <% if(checklist[i].getallocation_done()){%>
                 <br>Allocated Already
             <%}
             else{%>
-                <br>Yet to be Allocated
+                <br>
+                <%  
+                    session.setAttribute("class_to_allocate",list.get(i));
+                %>
+                <form action="/allocation_details">
+                    <input type="submit" value="Allocate Room">
+                </form>
             <%}%>
         </div>
         <% }

@@ -2,14 +2,11 @@ package com.first.software_project;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpSession;
@@ -137,40 +134,4 @@ public class Faculty_page {
         
         return "faculty_home";
     }
-    // public static void main(String args[]){
-
-    //     Scanner scn=new Scanner(System.in);
-    //     Faculty result=search_faculty(1);
-    //     System.out.println("The result will be: ");
-    //     System.out.println("Faculty id: "+result.getfaculty_id()+"Faculty name: "+result.getname()+"\nThe scheduled classes for the faculty: ");
-    //     System.out.println("On which day: ");
-    //     String day=scn.nextLine().toUpperCase().substring(0, 3);  
-    //     System.out.println("Selected list of class: ");
-    //     if(class_on_specific_day(result, day).size()==0){
-    //         System.out.println("You don't have any classes on this day.\n");
-    //     }
-    //     else{
-    //         for(Scheduled_class i:class_on_specific_day(result, day)){
-    //             System.out.println("Batch : "+i.getbatch()+"Day of the week: "+i.getday_of_week());
-    //         }
-    //     }
-    //     // Room_allocation allocation1=new Room_allocation();
-    //     // allocation1.setassigned_class(result.getclass_list().get(0));
-    //     if(allocate_room(201,result.getclass_list().get(0))){
-    //         System.out.println("The allocation was done successfully");
-    //     }
-    //     else{
-    //         System.out.println("The allocation was not successful");
-    //     }
-    //     scn.close();
-        // Scheduled_class class2=new Scheduled_class();
-		// class2.setclass_id(2);
-		
-        // if(check_allocated_or_not(class2, 20)){
-        //     System.out.println("The class was assigned.");
-        // }
-        // else{
-        //     System.out.println("The class is still not assigned with any clasroom.");
-        // }
-    // }
 }
