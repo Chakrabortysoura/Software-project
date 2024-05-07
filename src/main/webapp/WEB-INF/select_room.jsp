@@ -19,6 +19,8 @@
                 <span><%=available_rooms.get(i).getroom_no() %></span>
                 <input type="checkbox" name="room_no" id="" value="<%=available_rooms.get(i).getroom_no() %>">
             <%}%>
+            <input type="hidden" name="starting" value="<%=Integer.parseInt((request).getParameter("starting_time"))%>">
+            <input type="hidden" name="ending" value="<%=Integer.parseInt((request).getParameter("ending_time"))%>">
             <input type="submit" value="Allocate Room">
         </form>  
     </div>

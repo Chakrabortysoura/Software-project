@@ -38,6 +38,12 @@ public class Room_allocation{
     public int getstarting_time(){
         return this.starting_time;
     }
+    public int getroom_no(){
+        return this.ending_time;
+    }
+    public void setroom_no(int room_no){
+        this.room_no=room_no;
+    }
     public Scheduled_class getassigned_class(){
         return this.assigned_class;
     }
