@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script>
+    
+</script>
 <body>
     <h2>Select a room to be allocated for this class</h2>
     <div>

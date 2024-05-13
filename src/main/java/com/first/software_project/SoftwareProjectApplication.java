@@ -40,9 +40,11 @@ public class SoftwareProjectApplication {
 
 		// Scheduled_class class2=new Scheduled_class();
 		// class2.setclass_id(2);
-		// class2.setbatch("BCS3C");
-		// class2.setday_of_week("THU");
+		// class2.setbatch("BCS3B");
+		// class2.setday_of_week("WED");
 		// class2.setteacher(teacher1);
+		// class2.setstart(11);
+		// class2.setend(13);
 		// class2.settopic(s1);
 		
 		// Rooms r1=new Rooms(105);
@@ -58,7 +60,7 @@ public class SoftwareProjectApplication {
 		// config.addAnnotatedClass(Rooms.class).addAnnotatedClass(allocation_done.class);
 
 		// Room_allocation allocation1=new Room_allocation();
-		// allocation1.setdate(19);
+		// allocation1.setdate(10);
 		// allocation1.setassigned_class(class2);
 		
 		
@@ -68,10 +70,10 @@ public class SoftwareProjectApplication {
 
 		// // session1.persist(s1);
 		// // session1.persist(s2);
-		// // session1.persist(class2);
-		// // session1.persist(teacher1);
-		// // session1.persist(allocation1);
-		// // session1.persist(r1);
+		// session1.persist(class2);
+		// session1.persist(teacher1);
+		// session1.persist(allocation1);
+		// session1.persist(r1);
 		
 		// allocation_done search=new allocation_done();
 		// search.setclass_id(2);

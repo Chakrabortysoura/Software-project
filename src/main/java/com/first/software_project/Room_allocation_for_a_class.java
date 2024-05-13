@@ -1,6 +1,5 @@
 package com.first.software_project;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -100,7 +99,7 @@ public class Room_allocation_for_a_class {
     
     
     @RequestMapping("/allocation_details")
-    public String allocation_details_page(HttpSession s1,HttpServletRequest r){
+    public String allocation_details_page(){
         return "allocation_details";    
     }
 
@@ -128,6 +127,8 @@ public class Room_allocation_for_a_class {
         return "success_allocation";
         
     }
+
+
     @RequestMapping("/go_back_to_home")
     public String go_home_page(HttpSession  s1){
         int teacher_id=((Faculty)s1.getAttribute("faculty_details")).getfaculty_id();

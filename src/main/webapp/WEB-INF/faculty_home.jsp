@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
 <%@ page import="com.first.software_project.Faculty"%>
 <%@ page import="com.first.software_project.Scheduled_class"%>
 <%@ page import="com.first.software_project.Subjects"%>
-<%@ page import="com.first.software_project.allocation_done"%>
+<%@ page import="com.first.software_project.Allocation_done"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
         } 
         else{
             List<Scheduled_class> list=(List<Scheduled_class>)session.getAttribute("class_list"); 
-            allocation_done[] checklist=(allocation_done[])session.getAttribute("allocation_checklist");
+            Allocation_done[] checklist=(Allocation_done[])session.getAttribute("allocation_checklist");
             for(int i=0;i<list.size();i++){
         %>
         <div style="border: 2px solid brown;height: 140px; border-radius: 8px; display: inline-block; width: 25%; text-align: center; padding-top: 52px; background-color: rgb(255, 187, 153);">

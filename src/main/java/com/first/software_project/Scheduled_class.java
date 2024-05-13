@@ -1,5 +1,7 @@
 package com.first.software_project;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -9,11 +11,13 @@ import jakarta.persistence.ManyToOne;
 public class Scheduled_class {
     @Id
     private int class_id;
-    private String batch,day_of_week;
+
+    private String batch;
+    private String day_of_week;
     private int start,end;
     @ManyToOne(fetch = FetchType.EAGER)
     private Subjects topic;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Faculty teacher;
     public void setclass_id(int id){
         this.class_id=id;
@@ -39,6 +43,7 @@ public class Scheduled_class {
     public void setday_of_week(String day){
         this.day_of_week=day;
     }
+    @JsonBackReference
     public Faculty getteacher(){
         return this.teacher;
     }

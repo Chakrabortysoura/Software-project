@@ -122,10 +122,10 @@ public class Faculty_page {
         s1.setAttribute("class_list", today_classes);
         
         // check how many of the classes have already assigned classrooms
-        allocation_done[] checklist=new allocation_done[today_classes.size()];
+        Allocation_done[] checklist=new Allocation_done[today_classes.size()];
         for(int i=0;i<today_classes.size();i++){
-            checklist[i]=new allocation_done();
-            if(check_allocated_or_not(today_classes.get(i), 20)){
+            checklist[i]=new Allocation_done();
+            if(check_allocated_or_not(today_classes.get(i), 29)){
                 checklist[i].setallocation_done();
             }
         }
