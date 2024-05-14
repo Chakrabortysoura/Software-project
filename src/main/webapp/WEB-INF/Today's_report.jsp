@@ -9,20 +9,14 @@ pageEncoding="UTF-8"%>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>student</title>
+    <title>Today's Reports</title>
 </head>
-<script>
-    
-</script>
-<style>
-
-</style>
 <body>
     <div  id="heading">
-        Today's Classes
+        Today's Classes So Far
     </div>
     <%  List<Scheduled_class> class_list=(List<Scheduled_class>)request.getAttribute("class_list"); 
-        boolean[] checklist=(boolean[])request.getAttribute("allocation_checklist"); 
+        boolean[] checklist=(boolean[])request.getAttribute("checklist"); 
         if(class_list.size()==0){ %>
             <div class="classes">There are no classes today.</div>
         <%}
