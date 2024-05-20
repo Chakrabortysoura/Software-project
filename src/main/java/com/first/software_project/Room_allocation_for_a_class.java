@@ -1,5 +1,6 @@
 package com.first.software_project;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -34,7 +35,7 @@ public class Room_allocation_for_a_class {
         return list_of_rooms;
     }
 
-    public synchronized void allocation_entry(Scheduled_class class_to_allocate,int start,int end,int date,int room){
+    public synchronized void allocation_entry(Scheduled_class class_to_allocate,int start,int end,String date,int room){
         //sychronized function for actually adding the entry for successfull allocation.
         
         //set all the parameter in the allocation entry
@@ -67,8 +68,9 @@ public class Room_allocation_for_a_class {
     
     protected class add_allocation extends Thread{
         Scheduled_class class_to_allocate;
-        int start, date,end,room;
-        add_allocation(Scheduled_class class_to_allocate,int start,int end,int date,int room){
+        private int start,end,room;
+        private String date;
+        add_allocation(Scheduled_class class_to_allocate,int start,int end,String date,int room){
             this.class_to_allocate=class_to_allocate;
             this.start=start;
             this.date=date;
@@ -111,7 +113,7 @@ public class Room_allocation_for_a_class {
         System.out.println("The room no is:"+room_no);
         //creating the thread which will call the sychronized function for allocating the room
         try{
-            add_allocation thread1=new add_allocation(target_class, start, end,29,room_no);
+            add_allocation thread1=new add_allocation(target_class, start, end,LocalDate.now().toString(),room_no);
             thread1.start();
             System.out.println("The room allocation was successful.");
         }

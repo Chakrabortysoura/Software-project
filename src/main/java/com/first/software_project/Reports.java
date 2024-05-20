@@ -1,5 +1,8 @@
 package com.first.software_project;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -41,7 +44,7 @@ public class Reports {
         List<Scheduled_class> result_list=list_of_classes_by_the_day("WED");
         boolean[] checklist=new boolean[result_list.size()];
         for(int i=0;i<result_list.size();i++){
-            checklist[i]=Faculty_page.check_allocated_or_not(result_list.get(i),10);
+            checklist[i]=Faculty_page.check_allocated_or_not(result_list.get(i),LocalDate.now().toString());
         }
         m.addAttribute("checklist", checklist);
         m.addAttribute("class_list", result_list);
@@ -50,7 +53,9 @@ public class Reports {
 
     @RequestMapping("/weekly_report")
     public String weekly_report(Model m){
-        
+        int currentdate=LocalDate.now().getDayOfMonth();
+        System.out.println("The current date: "+currentdate);
         return "Week_report";
     }
+    
 }

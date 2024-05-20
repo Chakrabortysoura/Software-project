@@ -23,7 +23,7 @@ pageEncoding="UTF-8"%>
     </div>
     <%  List<Scheduled_class> class_list=(List<Scheduled_class>)request.getAttribute("class_list"); 
         boolean[] checklist=(boolean[])request.getAttribute("allocation_checklist"); 
-        if(class_list.size()==0){ %>
+        if(class_list==null){ %>
             <div class="classes">There are no classes today.</div>
         <%}
         else{

@@ -30,6 +30,10 @@ public class SoftwareProjectApplication {
 		// teacher1.setfaculty_id(1);
 		// teacher1.setname("SC");
 
+		// Faculty teacher2=new Faculty();
+		// teacher2.setfaculty_id(2);
+		// teacher2.setname("PK");
+
 		// Subjects s1=new Subjects();
 		// s1.setsubject_code(1);
 		// s1.setsubject_name("DBMS");
@@ -37,6 +41,15 @@ public class SoftwareProjectApplication {
 		// Subjects s2=new Subjects();
 		// s2.setsubject_code(2);
 		// s2.setsubject_name("LINUX");
+
+		// Scheduled_class class1=new Scheduled_class();
+		// class1.setclass_id(1);
+		// class1.setbatch("BCS3A");
+		// class1.setday_of_week("THU");
+		// class1.setteacher(teacher1);
+		// class1.setstart(11);
+		// class1.setend(13);
+		// class1.settopic(s2);
 
 		// Scheduled_class class2=new Scheduled_class();
 		// class2.setclass_id(2);
@@ -47,6 +60,23 @@ public class SoftwareProjectApplication {
 		// class2.setend(13);
 		// class2.settopic(s1);
 		
+		// Scheduled_class class3=new Scheduled_class();
+		// class3.setclass_id(3);
+		// class3.setbatch("BCS3A");
+		// class3.setday_of_week("THU");
+		// class3.setteacher(teacher2);
+		// class3.setstart(14);
+		// class3.setend(15);
+		// class3.settopic(s2);
+
+		// Scheduled_class class4=new Scheduled_class();
+		// class4.setclass_id(4);
+		// class4.setbatch("BCS2B");
+		// class4.setday_of_week("WED");
+		// class4.setteacher(teacher2);
+		// class4.setstart(10);
+		// class4.setend(11);
+		// class4.settopic(s1);
 		// Rooms r1=new Rooms(105);
 		// Rooms r2=new Rooms(200);
 		
@@ -57,7 +87,7 @@ public class SoftwareProjectApplication {
 		// config.addAnnotatedClass(Faculty.class);
 		// config.addAnnotatedClass(Scheduled_class.class);
 		// config.addAnnotatedClass(Room_allocation.class);
-		// config.addAnnotatedClass(Rooms.class).addAnnotatedClass(allocation_done.class);
+		// config.addAnnotatedClass(Rooms.class);
 
 		// Room_allocation allocation1=new Room_allocation();
 		// allocation1.setdate(10);
@@ -68,12 +98,14 @@ public class SoftwareProjectApplication {
 		// Session session1=builder.openSession();
 		// Transaction t1=session1.beginTransaction();
 
-		// // session1.persist(s1);
-		// // session1.persist(s2);
-		// session1.persist(class2);
+		// session1.persist(s1);
+		// session1.persist(s2);
 		// session1.persist(teacher1);
-		// session1.persist(allocation1);
-		// session1.persist(r1);
+		// session1.persist(teacher2);
+		// session1.persist(class1);
+		// session1.persist(class2);
+		// session1.persist(class3);
+		// session1.persist(class4);
 		
 		// allocation_done search=new allocation_done();
 		// search.setclass_id(2);
@@ -89,10 +121,6 @@ public class SoftwareProjectApplication {
 		
 		// t1.commit();
 		// session1.close();
-
-		LocalDate todaydate=LocalDate.now();
-		DayOfWeek day=todaydate.getDayOfWeek();
-		System.out.println("Day of the week: "+day.toString());
 		
 	}
 

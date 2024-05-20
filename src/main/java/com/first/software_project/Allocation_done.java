@@ -6,6 +6,9 @@ public class Allocation_done {
     public void setclass_id(int class_id){
         this.class_id=class_id;
     }
+    public int getclass_id(){
+        return class_id;
+    }
     public void setallocation_done(){
         this.allocation_done=true;
     }

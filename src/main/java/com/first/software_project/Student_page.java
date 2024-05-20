@@ -1,5 +1,6 @@
 package com.first.software_project;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,6 @@ public class Student_page {
         NativeQuery<Scheduled_class> searquery=s1.createNativeQuery("select * from Scheduled_class where batch=:batch and day_of_week=:day",Scheduled_class.class);
         
         try{
-            
             searquery.setParameter("batch", batch_no).setParameter("day", day);
             result=searquery.getResultList();
         }
@@ -42,8 +42,8 @@ public class Student_page {
     }
 
     @RequestMapping("/student_page")
-    public String student_home_page(@RequestParam("batch") String  batch_no,Model m){
-        List<Scheduled_class> class_list=class_for_batches(batch_no, "WED");
+    public String student_home_page(@RequestParam("batch") String  batch_no,@RequestParam("day")String day,Model m){
+        List<Scheduled_class> class_list=class_for_batches(batch_no, day);
         System.out.println("The class list for today:\n");
         if(class_list.size()==0){
             System.out.println("There is no class today.\n");
@@ -52,7 +52,7 @@ public class Student_page {
             boolean[] checklist=new boolean[class_list.size()];
             // System.out.println((class_list.size()));
             for(int i=0;i<class_list.size();i++){
-                checklist[i]=Faculty_page.check_allocated_or_not(class_list.get(i), 10);
+                checklist[i]=Faculty_page.check_allocated_or_not(class_list.get(i), LocalDate.now().toString());
             }
             m.addAttribute("allocation_checklist", checklist);
             m.addAttribute("class_list", class_list);
