@@ -38,11 +38,12 @@ pageEncoding="UTF-8"%>
             <br>Topic: <%=list.get(i).gettopic().getsubject_name() %>
             <br>Starting time: <%=list.get(i).getstart() %>
             <br>End time: <%=list.get(i).getend() %>
-            <% if(checklist[i].getallocation_done()){%>
-                <br>Allocated Already
+            <% if(checklist[i].getallocation_done()!=-1){%>
+                <br>Allocated Already At Room no: <%=checklist[i].getallocation_done()%>
             <%}
             else{%>
                 <br>
+                <%=checklist[i].getallocation_done() %>
                 <%  
                     session.setAttribute("class_to_allocate",list.get(i));
                 %>

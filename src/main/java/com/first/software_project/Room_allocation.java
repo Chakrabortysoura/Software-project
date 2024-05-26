@@ -15,7 +15,6 @@ public class Room_allocation{
     private int ending_time,starting_time,room_no;
     @ManyToOne
     private Scheduled_class assigned_class;
-
     // setters and getter methods for the member variables
     public void setdate(String date){
         this.date=date;

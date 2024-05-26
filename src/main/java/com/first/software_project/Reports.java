@@ -42,7 +42,7 @@ public class Reports {
     @RequestMapping("/today_report")
     public String daily_report(Model m){
         List<Scheduled_class> result_list=list_of_classes_by_the_day("WED");
-        boolean[] checklist=new boolean[result_list.size()];
+        int[] checklist=new int[result_list.size()];
         for(int i=0;i<result_list.size();i++){
             checklist[i]=Faculty_page.check_allocated_or_not(result_list.get(i),LocalDate.now().toString());
         }

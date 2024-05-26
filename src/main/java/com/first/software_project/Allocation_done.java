@@ -2,17 +2,17 @@ package com.first.software_project;
 
 public class Allocation_done {
     private int class_id;
-    private boolean allocation_done=false;
+    private int allocation_done=-1;
     public void setclass_id(int class_id){
         this.class_id=class_id;
     }
     public int getclass_id(){
         return class_id;
     }
-    public void setallocation_done(){
-        this.allocation_done=true;
+    public void setallocation_done(int no){
+        this.allocation_done=no;
     }
-    public boolean getallocation_done(){
+    public int getallocation_done(){
         return this.allocation_done;
     }
 }
