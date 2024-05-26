@@ -1,5 +1,6 @@
 package com.first.software_project;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
@@ -48,7 +49,7 @@ public class Faculty_page {
         return class_list;
     }
 
-    public static boolean check_allocated_or_not(Scheduled_class class1,int date){
+    public static boolean check_allocated_or_not(Scheduled_class class1,String date){
         //to check if the room is allocated or not 
         boolean flag=true;
         //configuration 
@@ -109,6 +110,7 @@ public class Faculty_page {
     @RequestMapping("/faculty_home_page")
     public String faculty_home(@RequestParam("id") int teacher_id,@RequestParam("day") String day_of_week,HttpSession s1){
         
+        String current_date=LocalDate.now().toString();
         Faculty teacher=search_faculty(teacher_id);
         //search for all the classes for the faculty on that day
         // and get the teachers details from searching by the teacher's id
@@ -122,10 +124,10 @@ public class Faculty_page {
         s1.setAttribute("class_list", today_classes);
         
         // check how many of the classes have already assigned classrooms
-        allocation_done[] checklist=new allocation_done[today_classes.size()];
+        Allocation_done[] checklist=new Allocation_done[today_classes.size()];
         for(int i=0;i<today_classes.size();i++){
-            checklist[i]=new allocation_done();
-            if(check_allocated_or_not(today_classes.get(i), 20)){
+            checklist[i]=new Allocation_done();
+            if(check_allocated_or_not(today_classes.get(i), current_date)){
                 checklist[i].setallocation_done();
             }
         }

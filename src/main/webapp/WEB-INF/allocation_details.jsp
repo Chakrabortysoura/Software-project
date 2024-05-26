@@ -3,7 +3,7 @@ pageEncoding="UTF-8"%>
 <%@ page import="com.first.software_project.Faculty"%>
 <%@ page import="com.first.software_project.Scheduled_class"%>
 <%@ page import="com.first.software_project.Subjects"%>
-<%@ page import="com.first.software_project.allocation_done"%>
+<%@ page import="com.first.software_project.Allocation_done"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +20,9 @@ pageEncoding="UTF-8"%>
         <span>Batch: </span><%=((Scheduled_class)session.getAttribute("class_to_allocate")).getbatch() %> <br>
         <span>Topic: </span><%=((Scheduled_class)session.getAttribute("class_to_allocate")).gettopic().getsubject_name() %> <br>
         <form action="/room_selection">
-            <input type="text" name="starting_time" id="" value="<%=((Scheduled_class)session.getAttribute("class_to_allocate")).getstart()  %>">
-            <input type="text" name="ending_time" id="" value="<%=((Scheduled_class)session.getAttribute("class_to_allocate")).getend()  %>">
+            <input type="number" name="starting_time" min="<%=((Scheduled_class)session.getAttribute("class_to_allocate")).getstart()  %>" max="<%=((Scheduled_class)session.getAttribute("class_to_allocate")).getstart()+60  %>" value="<%=((Scheduled_class)session.getAttribute("class_to_allocate")).getstart()  %>">
+            
+            <input type="number" name="ending_time" min="<%=((Scheduled_class)session.getAttribute("class_to_allocate")).getstart()  %>" max="<%=((Scheduled_class)session.getAttribute("class_to_allocate")).getend()+15  %>" value="<%=((Scheduled_class)session.getAttribute("class_to_allocate")).getend()  %>">
             <input type="submit" value="ALLOCATE">
         </form>
     </div>

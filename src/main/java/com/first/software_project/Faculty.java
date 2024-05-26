@@ -3,6 +3,8 @@ package com.first.software_project;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -36,6 +38,7 @@ public class Faculty {
     public String getname(){
         return this.name;
     }
+    @JsonManagedReference
     public List<Scheduled_class> getclass_list(){
         return class_list;
     }

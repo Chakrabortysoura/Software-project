@@ -3,11 +3,18 @@
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"> 
 <hibernate-configuration>       
-  <session-factory>
+  <!-- <session-factory>
     <property name="connection.url">jdbc:mysql://localhost:3306/soft_eng?createDatabaseIfNotExist=true</property>
     <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
     <property name="hibernate.connection.username">souranil</property>
     <property name="hibernate.connection.password">Souranil@21</property>
+    <property name="hbm2ddl.auto">update</property>
+  </session-factory> -->
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12708589?createDatabaseIfNotExist=true</property>
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="hibernate.connection.username">sql12708589</property>
+    <property name="hibernate.connection.password">p2NHnLQuHd</property>
     <property name="hbm2ddl.auto">update</property>
   </session-factory>
 </hibernate-configuration>
