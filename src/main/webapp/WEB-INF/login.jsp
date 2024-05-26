@@ -19,8 +19,5 @@ pageEncoding="UTF-8"%>
         <input type="hidden" name="day" value="<%=day.toString() %>" >
         <input type="submit" value="LOGIN">
     </form>
-    <p>
-    H1
-    </p>
 </body>
 </html>

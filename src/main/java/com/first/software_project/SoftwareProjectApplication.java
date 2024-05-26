@@ -77,26 +77,26 @@ public class SoftwareProjectApplication {
 		// class4.setstart(10);
 		// class4.setend(11);
 		// class4.settopic(s1);
-		Rooms r1=new Rooms(105);
-		Rooms r2=new Rooms(200);
+		//Rooms r1=new Rooms(105);
+		//Rooms r2=new Rooms(200);
 		
 		// teacher1.setclass_list(class2);
 
-		Configuration config=new Configuration().configure("hibernate.cfg.xml");
+		//Configuration config=new Configuration().configure("hibernate.cfg.xml");
 		// config.addAnnotatedClass(Subjects.class);
 		// config.addAnnotatedClass(Faculty.class);
 		// config.addAnnotatedClass(Scheduled_class.class);
 		// config.addAnnotatedClass(Room_allocation.class);
-		config.addAnnotatedClass(Rooms.class);
+		//config.addAnnotatedClass(Rooms.class);
 
 		// Room_allocation allocation1=new Room_allocation();
 		// allocation1.setdate(10);
 		// allocation1.setassigned_class(class2);
 		
 		
-		SessionFactory builder=config.buildSessionFactory();
-		Session session1=builder.openSession();
-		Transaction t1=session1.beginTransaction();
+		// SessionFactory builder=config.buildSessionFactory();
+		// Session session1=builder.openSession();
+		// Transaction t1=session1.beginTransaction();
 
 		// session1.persist(s1);
 		// session1.persist(s2);
@@ -104,8 +104,8 @@ public class SoftwareProjectApplication {
 		// session1.persist(teacher2);
 		// session1.persist(class1);
 		// session1.persist(class2);
-		session1.persist(r1);
-		session1.persist(r2);
+		// session1.persist(r1);
+		// session1.persist(r2);
 		
 		// allocation_done search=new allocation_done();
 		// search.setclass_id(2);
@@ -119,8 +119,8 @@ public class SoftwareProjectApplication {
 		// System.out.println("The result will be for the search query: ");
 		// System.out.println("Day of the week: "+result.getassigned_class().getday_of_week()+"Batch: "+result.getassigned_class().getbatch());
 		
-		t1.commit();
-		session1.close();
+		// t1.commit();
+		// session1.close();
 		
 	}
 
