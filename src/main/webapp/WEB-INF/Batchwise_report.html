@@ -1,11 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batch class Reports</title>
+    <title>Batch Wise Room Allocation Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .batch-info {
+            padding: 20px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .batch-info h2 {
+            margin-top: 0;
+        }
+
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .report-table th,
+        .report-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .report-table th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .report-table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        @media print {
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            header,
+            .footer {
+                page-break-before: always;
+                page-break-after: always;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="container">
+        <header>
+            <h1>Batch Wise Room Allocation Report</h1>
+        </header>
+        <section class="batch-info">
+            <h2>Batch: CS2021</h2>
+            <p>Date: May 30, 2024</p>
+        </section>
+        <section>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Class Name</th>
+                        <th>Number of Students</th>
+                        <th>Allocated Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>Data Structures</td>
+                        <td>30</td>
+                        <td>09:00 AM - 10:30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>102</td>
+                        <td>Algorithms</td>
+                        <td>25</td>
+                        <td>10:45 AM - 12:15 PM</td>
+                    </tr>
+                    <tr>
+                        <td>103</td>
+                        <td>Database Systems</td>
+                        <td>28</td>
+                        <td>01:00 PM - 02:30 PM</td>
+                    </tr>
+                    <tr>
+                        <td>104</td>
+                        <td>Operating Systems</td>
+                        <td>32</td>
+                        <td>02:45 PM - 04:15 PM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <footer class="footer">
+            <p>© 2024 Your Institution Name. All Rights Reserved.</p>
+        </footer>
+    </div>
 </body>
+
 </html>

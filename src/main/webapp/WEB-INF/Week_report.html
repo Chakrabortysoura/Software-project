@@ -3,9 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekly Report</title>
+    <title>Weekly Room Allocation Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        header p {
+            margin: 5px 0;
+            color: #777;
+        }
+
+        .report {
+            margin-top: 20px;
+        }
+
+        .report h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .report-table th,
+        .report-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .report-table th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .report-table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .report-table tbody tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        @media print {
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            header,
+            .footer {
+                page-break-before: always;
+                page-break-after: always;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <header>
+            <h1>Weekly Room Allocation Report</h1>
+            <p>Techno India University - <span id="date-range"></span></p>
+        </header>
+        <section class="report">
+            <h2>Room Allocation Summary</h2>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Class Name</th>
+                        <th>Instructor</th>
+                        <th>Batch</th>
+                        <th>Allocated Time</th>
+                        <th>Days (Date)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>Data Structures</td>
+                        <td>Dr. John Doe</td>
+                        <td>A</td>
+                        <td>09:00 AM - 10:30 AM</td>
+                        <td>Monday, Wednesday, Friday</td>
+                    </tr>
+                    <tr>
+                        <td>102</td>
+                        <td>Algorithms</td>
+                        <td>Prof. Jane Smith</td>
+                        <td>B</td>
+                        <td>10:45 AM - 12:15 PM</td>
+                        <td>Tuesday, Thursday</td>
+                    </tr>
+                    <tr>
+                        <td>103</td>
+                        <td>Database Systems</td>
+                        <td>Dr. Emily Clark</td>
+                        <td>C</td>
+                        <td>01:00 PM - 02:30 PM</td>
+                        <td>Monday, Wednesday, Friday</td>
+                    </tr>
+                    <tr>
+                        <td>104</td>
+                        <td>Operating Systems</td>
+                        <td>Prof. Michael Brown</td>
+                        <td>D</td>
+                        <td>02:45 PM - 04:15 PM</td>
+                        <td>Tuesday, Thursday</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Rescheduled / Canceled Classes</h2>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Class Name</th>
+                        <th>Instructor</th>
+                        <th>Batch</th>
+                        <th>Original Time</th>
+                        <th>New Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>201</td>
+                        <td>Software Engineering</td>
+                        <td>Dr. William Lee</td>
+                        <td>A</td>
+                        <td>09:00 AM - 10:30 AM</td>
+                        <td>11:00 AM - 12:30 PM</td>
+                        <td>Rescheduled</td>
+                    </tr>
+                    <tr>
+                        <td>202</td>
+                        <td>Network Security</td>
+                        <td>Prof. Linda Green</td>
+                        <td>B</td>
+                        <td>10:45 AM - 12:15 PM</td>
+                        <td>N/A</td>
+                        <td>Canceled</td>
+                    </tr>
+                    <tr>
+                        <td>203</td>
+                        <td>Machine Learning</td>
+                        <td>Dr. Peter Parker</td>
+                        <td>C</td>
+                        <td>01:00 PM - 02:30 PM</td>
+                        <td>03:00 PM - 04:30 PM</td>
+                        <td>Rescheduled</td>
+                    </tr>
+                    <tr>
+                        <td>204</td>
+                        <td>Artificial Intelligence</td>
+                        <td>Prof. Mary Johnson</td>
+                        <td>D</td>
+                        <td>02:45 PM - 04:15 PM</td>
+                        <td>N/A</td>
+                        <td>Canceled</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <footer class="footer">
+            <p>© 2024 Institution Name. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.report-table tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                alert('Row clicked: ' + row.cells[1].innerText);
+            });
+        });
+
+        function getWeekRange() {
+            const today = new Date();
+            const firstDay = new Date(today.setDate(today.getDate() - today.getDay() + 1));
+            const lastDay = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+            const options = { month: 'long', day: 'numeric', year: 'numeric' };
+
+            return `${firstDay.toLocaleDateString('en-US', options)} - ${lastDay.toLocaleDateString('en-US', options)}`;
+        }
+
+        document.getElementById('date-range').innerText = getWeekRange();
+    </script>
 </body>
 </html>
