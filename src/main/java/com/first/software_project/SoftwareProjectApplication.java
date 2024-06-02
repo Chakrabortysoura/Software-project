@@ -15,16 +15,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cglib.core.Local;
 
 import jakarta.persistence.Query;
-
-
 @SpringBootApplication
 public class SoftwareProjectApplication {
-	// public static List<Rooms> get_room_list(Session s){
-	// 	return s.get
-	// }
 	public static void main(String[] args) {
 		SpringApplication.run(SoftwareProjectApplication.class, args);
-
 
 		// Faculty teacher1=new Faculty();
 		// teacher1.setfaculty_id(1);
@@ -41,6 +35,10 @@ public class SoftwareProjectApplication {
 		// Subjects s2=new Subjects();
 		// s2.setsubject_code(2);
 		// s2.setsubject_name("LINUX");
+
+		// Subjects s3=new Subjects();
+		// s3.setsubject_code(3);
+		// s3.setsubject_name("NETWORKING");
 
 		// Scheduled_class class1=new Scheduled_class();
 		// class1.setclass_id(1);
@@ -83,11 +81,19 @@ public class SoftwareProjectApplication {
 		// teacher1.setclass_list(class2);
 
 		//Configuration config=new Configuration().configure("hibernate.cfg.xml");
+		// class4.settopic(s3);
+		// Rooms r1=new Rooms(105);
+		// Rooms r2=new Rooms(200);
+		
+		// teacher1.setclass_list(class2);
+
+		// Configuration config=new Configuration().configure("hibernate.cfg.xml");
 		// config.addAnnotatedClass(Subjects.class);
 		// config.addAnnotatedClass(Faculty.class);
 		// config.addAnnotatedClass(Scheduled_class.class);
 		// config.addAnnotatedClass(Room_allocation.class);
 		//config.addAnnotatedClass(Rooms.class);
+		// config.addAnnotatedClass(Rooms.class);
 
 		// Room_allocation allocation1=new Room_allocation();
 		// allocation1.setdate(10);
@@ -100,10 +106,13 @@ public class SoftwareProjectApplication {
 
 		// session1.persist(s1);
 		// session1.persist(s2);
+		// session1.persist(s3);
 		// session1.persist(teacher1);
 		// session1.persist(teacher2);
 		// session1.persist(class1);
 		// session1.persist(class2);
+		// session1.persist(class3);
+		// session1.persist(class4);
 		// session1.persist(r1);
 		// session1.persist(r2);
 		

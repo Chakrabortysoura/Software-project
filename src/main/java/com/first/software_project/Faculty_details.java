@@ -36,9 +36,9 @@ public class Faculty_details {
         for(Scheduled_class i:Faculty_page.class_on_specific_day(teacher, day)){
             Allocation_done temp=new Allocation_done();
             temp.setclass_id(i.getclass_id());
-            if(Faculty_page.check_allocated_or_not(i, LocalDate.now().toString())){
-               temp.setallocation_done(); 
-            }
+            // if(Faculty_page.check_allocated_or_not(i, LocalDate.now().toString())){
+            temp.setallocation_done(Faculty_page.check_allocated_or_not(i, LocalDate.now().toString())); 
+            // }
             result_list.add(temp);
         }
         System.out.println("classes_on_a_specific_day() called");

@@ -49,22 +49,32 @@ public class Faculty_page {
         return class_list;
     }
 
-    public static boolean check_allocated_or_not(Scheduled_class class1,String date){
+    public static int check_allocated_or_not(Scheduled_class class1,String date){
         //to check if the room is allocated or not 
-        boolean flag=true;
+        int flag=-1;
         //configuration 
         Configuration config=new Configuration().configure();
         SessionFactory sessionbuilder=config.buildSessionFactory();
         Session s1=sessionbuilder.openSession();
         s1.beginTransaction();
 
-        NativeQuery<Room_allocation> search=s1.createNativeQuery("select * from Room_allocation where assigned_class_class_id= :class_id and date=:date",Room_allocation.class);
+        NativeQuery<Integer> allocated_room=s1.createNativeQuery("select room_no from Room_allocation where assigned_class_class_id= :class_id and date=:date",Integer.class);
+        NativeQuery<Integer> start_time=s1.createNativeQuery("select ending_time from Room_allocation where assigned_class_class_id= :class_id and date=:date",Integer.class);
+        NativeQuery<Integer> end_time=s1.createNativeQuery("select starting_time from Room_allocation where assigned_class_class_id= :class_id and date=:date",Integer.class);
+        
         try{
-            search.setParameter("class_id", class1.getclass_id()).setParameter("date", date);
-		    List<Room_allocation> result=search.getResultList();
-            if(result.size()==0){
-                flag=false;
+            allocated_room.setParameter("class_id", class1.getclass_id()).setParameter("date", date);
+            start_time.setParameter("class_id", class1.getclass_id()).setParameter("date", date);
+            end_time.setParameter("class_id", class1.getclass_id()).setParameter("date", date);
+		    List<Integer> result=allocated_room.getResultList();
+            flag=result.get(0);
+            if(result.get(0)!=-1){
+                result=start_time.getResultList();
+                class1.setstart(result.get(0));
+                result=end_time.getResultList();
+                class1.setend(result.get(0));
             }
+            return flag;
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -127,9 +137,9 @@ public class Faculty_page {
         Allocation_done[] checklist=new Allocation_done[today_classes.size()];
         for(int i=0;i<today_classes.size();i++){
             checklist[i]=new Allocation_done();
-            if(check_allocated_or_not(today_classes.get(i), current_date)){
-                checklist[i].setallocation_done();
-            }
+            // if(check_allocated_or_not(today_classes.get(i), current_date)){
+                checklist[i].setallocation_done(check_allocated_or_not(today_classes.get(i), current_date));
+            // }
         }
         //saving the checklist in the session object
         s1.setAttribute("allocation_checklist", checklist);
