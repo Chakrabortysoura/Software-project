@@ -74,6 +74,73 @@
         .buttons a:hover {
             background-color: #1a252f;
         }
+
+        .report {
+            margin-top: 20px;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .report h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .report-table th,
+        .report-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .report-table th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .report-table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .report-table tbody tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .form-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .form-section input[type="date"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 50%;
+            max-width: 300px;
+        }
+
+        .form-section input[type="submit"] {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #2c3e50;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .form-section input[type="submit"]:hover {
+            background-color: #1a252f;
+        }
     </style>
 </head>
 <body>
@@ -89,115 +156,145 @@
         </div>
         <div id="weekly_report" class="report_types">
             <span>Weekly Section</span>
-            <div class="buttons"><a href="#">This Week's Report</a></div>
+            <div class="buttons">
+                <form class="form-section" id="dateForm" action="/weekly_report">
+                    <input type="date" name="report_date" id="report_date" required>
+                    <input type="submit">
+                </form>
+            </div>
         </div>
-        <!-- <div id="today_classes" class="report_types">
-            <span>Today's Class Reports</span>
-            <div class="buttons"><a href="#">Today's Report</a></div>
-        </div> -->
-        <div> 
-        <section class="report">
-            <h2>Room Allocation Summary</h2>
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th>Room Number</th>
-                        <th>Class Name</th>
-                        <th>Instructor</th>
-                        <th>Batch</th>
-                        <th>Allocated Time</th>
-                        <th>Days (Date)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>101</td>
-                        <td>Data Structures</td>
-                        <td>Dr. John Doe</td>
-                        <td>A</td>
-                        <td>09:00 AM - 10:30 AM</td>
-                        <td>Monday, Wednesday, Friday</td>
-                    </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>Algorithms</td>
-                        <td>Prof. Jane Smith</td>
-                        <td>B</td>
-                        <td>10:45 AM - 12:15 PM</td>
-                        <td>Tuesday, Thursday</td>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td>Database Systems</td>
-                        <td>Dr. Emily Clark</td>
-                        <td>C</td>
-                        <td>01:00 PM - 02:30 PM</td>
-                        <td>Monday, Wednesday, Friday</td>
-                    </tr>
-                    <tr>
-                        <td>104</td>
-                        <td>Operating Systems</td>
-                        <td>Prof. Michael Brown</td>
-                        <td>D</td>
-                        <td>02:45 PM - 04:15 PM</td>
-                        <td>Tuesday, Thursday</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h2>Rescheduled / Canceled Classes</h2>
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th>Room Number</th>
-                        <th>Class Name</th>
-                        <th>Instructor</th>
-                        <th>Batch</th>
-                        <th>Original Time</th>
-                        <th>New Time</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>201</td>
-                        <td>Software Engineering</td>
-                        <td>Dr. William Lee</td>
-                        <td>A</td>
-                        <td>09:00 AM - 10:30 AM</td>
-                        <td>11:00 AM - 12:30 PM</td>
-                        <td>Rescheduled</td>
-                    </tr>
-                    <tr>
-                        <td>202</td>
-                        <td>Network Security</td>
-                        <td>Prof. Linda Green</td>
-                        <td>B</td>
-                        <td>10:45 AM - 12:15 PM</td>
-                        <td>N/A</td>
-                        <td>Canceled</td>
-                    </tr>
-                    <tr>
-                        <td>203</td>
-                        <td>Machine Learning</td>
-                        <td>Dr. Peter Parker</td>
-                        <td>C</td>
-                        <td>01:00 PM - 02:30 PM</td>
-                        <td>03:00 PM - 04:30 PM</td>
-                        <td>Rescheduled</td>
-                    </tr>
-                    <tr>
-                        <td>204</td>
-                        <td>Artificial Intelligence</td>
-                        <td>Prof. Mary Johnson</td>
-                        <td>D</td>
-                        <td>02:45 PM - 04:15 PM</td>
-                        <td>N/A</td>
-                        <td>Canceled</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
     </div>
+    
+    <div class="report">
+        <h2>Today's Room Allocation Summary</h2>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Class Name</th>
+                    <th>Instructor</th>
+                    <th>Batch</th>
+                    <th>Allocated Time</th>
+                    <th>Days (Date)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>101</td>
+                    <td>Data Structures</td>
+                    <td>Dr. John Doe</td>
+                    <td>A</td>
+                    <td>09:00 AM - 10:30 AM</td>
+                    <td>Monday, Wednesday, Friday</td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>Algorithms</td>
+                    <td>Prof. Jane Smith</td>
+                    <td>B</td>
+                    <td>10:45 AM - 12:15 PM</td>
+                    <td>Tuesday, Thursday</td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td>Database Systems</td>
+                    <td>Dr. Emily Clark</td>
+                    <td>C</td>
+                    <td>01:00 PM - 02:30 PM</td>
+                    <td>Monday, Wednesday, Friday</td>
+                </tr>
+                <tr>
+                    <td>104</td>
+                    <td>Operating Systems</td>
+                    <td>Prof. Michael Brown</td>
+                    <td>D</td>
+                    <td>02:45 PM - 04:15 PM</td>
+                    <td>Tuesday, Thursday</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Rescheduled / Canceled Classes</h2>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Class Name</th>
+                    <th>Instructor</th>
+                    <th>Batch</th>
+                    <th>Original Time</th>
+                    <th>New Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>201</td>
+                    <td>Software Engineering</td>
+                    <td>Dr. William Lee</td>
+                    <td>A</td>
+                    <td>09:00 AM - 10:30 AM</td>
+                    <td>11:00 AM - 12:30 PM</td>
+                    <td>Rescheduled</td>
+                </tr>
+                <tr>
+                    <td>202</td>
+                    <td>Network Security</td>
+                    <td>Prof. Linda Green</td>
+                    <td>B</td>
+                    <td>10:45 AM - 12:15 PM</td>
+                    <td>N/A</td>
+                    <td>Canceled</td>
+                </tr>
+                <tr>
+                    <td>203</td>
+                    <td>Machine Learning</td>
+                    <td>Dr. Peter Parker</td>
+                    <td>C</td>
+                    <td>01:00 PM - 02:30 PM</td>
+                    <td>03:00 PM - 04:30 PM</td>
+                    <td>Rescheduled</td>
+                </tr>
+                <tr>
+                    <td>204</td>
+                    <td>Artificial Intelligence</td>
+                    <td>Prof. Mary Johnson</td>
+                    <td>D</td>
+                    <td>02:45 PM - 04:15 PM</td>
+                    <td>N/A</td>
+                    <td>Canceled</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="report" id="weeklyReportContent" style="display: none;">
+        <h2>Weekly Report</h2>
+        <div id="weeklyReportHeader"></div>
+        <!-- Weekly report content will be generated here -->
+    </div>
+
+    <script>
+        document.getElementById('dateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const reportDate = new Date(document.getElementById('report_date').value);
+            const weeklyReportContent = document.getElementById('weeklyReportContent');
+            const weeklyReportHeader = document.getElementById('weeklyReportHeader');
+            weeklyReportContent.style.display = 'block';
+
+            // Adjust the report data based on the selected date
+            const startDate = reportDate.toDateString();
+            const endDate = new Date(reportDate.setDate(reportDate.getDate() + 6)).toDateString();
+
+            // Set the date range in the report
+            weeklyReportHeader.innerHTML = `<h3>Report from ${startDate} to ${endDate}</h3>`;
+        });
+
+        document.querySelectorAll('.report-table tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                alert('Row clicked: ' + row.cells[1].innerText);
+            });
+        });
+    </script>
 </body>
 </html>
