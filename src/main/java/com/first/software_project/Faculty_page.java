@@ -49,7 +49,7 @@ public class Faculty_page {
         return class_list;
     }
 
-    public static int check_allocated_or_not(Scheduled_class class1,String date){
+    public static int check_allocated_or_not(Scheduled_class class1,LocalDate date){
         //to check if the room is allocated or not 
         int flag=-1;
         //configuration 
@@ -58,9 +58,9 @@ public class Faculty_page {
         Session s1=sessionbuilder.openSession();
         s1.beginTransaction();
 
-        NativeQuery<Integer> allocated_room=s1.createNativeQuery("select room_no from Room_allocation where assigned_class_class_id= :class_id and date=:date",Integer.class);
-        NativeQuery<Integer> start_time=s1.createNativeQuery("select ending_time from Room_allocation where assigned_class_class_id= :class_id and date=:date",Integer.class);
-        NativeQuery<Integer> end_time=s1.createNativeQuery("select starting_time from Room_allocation where assigned_class_class_id= :class_id and date=:date",Integer.class);
+        NativeQuery<Integer> allocated_room=s1.createNativeQuery("select room_no from Room_allocation where assigned_class_class_id= :class_id and today_date=:date",Integer.class);
+        NativeQuery<Integer> end_time=s1.createNativeQuery("select ending_time from Room_allocation where assigned_class_class_id= :class_id and today_date=:date",Integer.class);
+        NativeQuery<Integer> start_time=s1.createNativeQuery("select starting_time from Room_allocation where assigned_class_class_id= :class_id and today_date=:date",Integer.class);
         
         try{
             allocated_room.setParameter("class_id", class1.getclass_id()).setParameter("date", date);
@@ -69,8 +69,10 @@ public class Faculty_page {
 		    List<Integer> result=allocated_room.getResultList();
             flag=result.get(0);
             if(result.get(0)!=-1){
+                // to check and update the newly allocated class start times which can differ from the originally allocated time
                 result=start_time.getResultList();
                 class1.setstart(result.get(0));
+                //to check the updated ending time for the class which can differ from the originally allocated time
                 result=end_time.getResultList();
                 class1.setend(result.get(0));
             }
@@ -120,7 +122,7 @@ public class Faculty_page {
     @RequestMapping("/faculty_home_page")
     public String faculty_home(@RequestParam("id") int teacher_id,@RequestParam("day") String day_of_week,HttpSession s1){
         
-        String current_date=LocalDate.now().toString();
+        // String current_date=LocalDate.now().toString();
         Faculty teacher=search_faculty(teacher_id);
         //search for all the classes for the faculty on that day
         // and get the teachers details from searching by the teacher's id
@@ -138,7 +140,7 @@ public class Faculty_page {
         for(int i=0;i<today_classes.size();i++){
             checklist[i]=new Allocation_done();
             // if(check_allocated_or_not(today_classes.get(i), current_date)){
-                checklist[i].setallocation_done(check_allocated_or_not(today_classes.get(i), current_date));
+                checklist[i].setallocation_done(check_allocated_or_not(today_classes.get(i), LocalDate.now()));
             // }
         }
         //saving the checklist in the session object

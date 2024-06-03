@@ -43,7 +43,7 @@ pageEncoding="UTF-8"%>
             <%}
             else{%>
                 <br>
-                <%=checklist[i].getallocation_done() %>
+                <span>Class Yet To Be Allocated a Room</span>
                 <%  
                     session.setAttribute("class_to_allocate",list.get(i));
                 %>

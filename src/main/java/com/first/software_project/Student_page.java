@@ -52,7 +52,7 @@ public class Student_page {
             int[] checklist=new int[class_list.size()];
             // System.out.println((class_list.size()));
             for(int i=0;i<class_list.size();i++){
-                checklist[i]=Faculty_page.check_allocated_or_not(class_list.get(i), LocalDate.now().toString());
+                checklist[i]=Faculty_page.check_allocated_or_not(class_list.get(i), LocalDate.now());
             }
             m.addAttribute("allocation_checklist", checklist);
             m.addAttribute("class_list", class_list);

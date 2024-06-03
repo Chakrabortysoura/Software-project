@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.first.software_project.Faculty"%>
+<%@ page import="com.first.software_project.Scheduled_class"%>
+<%@ page import="com.first.software_project.Subjects"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -158,7 +164,7 @@
             <span>Weekly Section</span>
             <div class="buttons">
                 <form class="form-section" id="dateForm" action="/weekly_report">
-                    <input type="date" name="report_date" id="report_date" required>
+                    <input type="date" name="starting_date" id="report_date" required>
                     <input type="submit">
                 </form>
             </div>
@@ -179,38 +185,21 @@
                 </tr>
             </thead>
             <tbody>
+            <% List<Scheduled_class> class_list = (List<Scheduled_class>) session.getAttribute("class_list");
+               int[] checklist = (int[]) session.getAttribute("checklist");
+               if(class_list.size()>0){
+               for(int i=0;i<class_list.size();i++){
+            %>
                 <tr>
-                    <td>101</td>
-                    <td>Data Structures</td>
-                    <td>Dr. John Doe</td>
-                    <td>A</td>
+                    <td> <%=checklist[i]%> </td>
+                    <td><%=class_list.get(i).gettopic().getsubject_name()%></td>
+                    <td><%=class_list.get(i).getteacher().getname()%></td>
+                    <td><%=class_list.get(i).getbatch()%></td>
                     <td>09:00 AM - 10:30 AM</td>
-                    <td>Monday, Wednesday, Friday</td>
+                    <td></td>
                 </tr>
-                <tr>
-                    <td>102</td>
-                    <td>Algorithms</td>
-                    <td>Prof. Jane Smith</td>
-                    <td>B</td>
-                    <td>10:45 AM - 12:15 PM</td>
-                    <td>Tuesday, Thursday</td>
-                </tr>
-                <tr>
-                    <td>103</td>
-                    <td>Database Systems</td>
-                    <td>Dr. Emily Clark</td>
-                    <td>C</td>
-                    <td>01:00 PM - 02:30 PM</td>
-                    <td>Monday, Wednesday, Friday</td>
-                </tr>
-                <tr>
-                    <td>104</td>
-                    <td>Operating Systems</td>
-                    <td>Prof. Michael Brown</td>
-                    <td>D</td>
-                    <td>02:45 PM - 04:15 PM</td>
-                    <td>Tuesday, Thursday</td>
-                </tr>
+            <%  }
+            }%>
             </tbody>
         </table>
 
@@ -237,64 +226,14 @@
                     <td>11:00 AM - 12:30 PM</td>
                     <td>Rescheduled</td>
                 </tr>
-                <tr>
-                    <td>202</td>
-                    <td>Network Security</td>
-                    <td>Prof. Linda Green</td>
-                    <td>B</td>
-                    <td>10:45 AM - 12:15 PM</td>
-                    <td>N/A</td>
-                    <td>Canceled</td>
-                </tr>
-                <tr>
-                    <td>203</td>
-                    <td>Machine Learning</td>
-                    <td>Dr. Peter Parker</td>
-                    <td>C</td>
-                    <td>01:00 PM - 02:30 PM</td>
-                    <td>03:00 PM - 04:30 PM</td>
-                    <td>Rescheduled</td>
-                </tr>
-                <tr>
-                    <td>204</td>
-                    <td>Artificial Intelligence</td>
-                    <td>Prof. Mary Johnson</td>
-                    <td>D</td>
-                    <td>02:45 PM - 04:15 PM</td>
-                    <td>N/A</td>
-                    <td>Canceled</td>
-                </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="report" id="weeklyReportContent" style="display: none;">
+    <%-- <div class="report" id="weeklyReportContent" style="display: none;">
         <h2>Weekly Report</h2>
         <div id="weeklyReportHeader"></div>
         <!-- Weekly report content will be generated here -->
-    </div>
-
-    <script>
-        document.getElementById('dateForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const reportDate = new Date(document.getElementById('report_date').value);
-            const weeklyReportContent = document.getElementById('weeklyReportContent');
-            const weeklyReportHeader = document.getElementById('weeklyReportHeader');
-            weeklyReportContent.style.display = 'block';
-
-            // Adjust the report data based on the selected date
-            const startDate = reportDate.toDateString();
-            const endDate = new Date(reportDate.setDate(reportDate.getDate() + 6)).toDateString();
-
-            // Set the date range in the report
-            weeklyReportHeader.innerHTML = `<h3>Report from ${startDate} to ${endDate}</h3>`;
-        });
-
-        document.querySelectorAll('.report-table tbody tr').forEach(row => {
-            row.addEventListener('click', () => {
-                alert('Row clicked: ' + row.cells[1].innerText);
-            });
-        });
-    </script>
+    </div> --%>
 </body>
 </html>

@@ -35,13 +35,13 @@ public class Room_allocation_for_a_class {
         return list_of_rooms;
     }
 
-    public synchronized void allocation_entry(Scheduled_class class_to_allocate,int start,int end,String date,int room){
+    public synchronized void allocation_entry(Scheduled_class class_to_allocate,int start,int end,int room){
         //sychronized function for actually adding the entry for successfull allocation.
         
         //set all the parameter in the allocation entry
         Room_allocation allocaiton_entry=new Room_allocation();
         allocaiton_entry.setassigned_class(class_to_allocate);
-        allocaiton_entry.setdate(date);
+        allocaiton_entry.setdate(LocalDate.now());
         allocaiton_entry.setstarting_time(start);
         allocaiton_entry.setending_time(end);
         allocaiton_entry.setroom_no(room);
@@ -69,17 +69,15 @@ public class Room_allocation_for_a_class {
     protected class add_allocation extends Thread{
         Scheduled_class class_to_allocate;
         private int start,end,room;
-        private String date;
-        add_allocation(Scheduled_class class_to_allocate,int start,int end,String date,int room){
+        add_allocation(Scheduled_class class_to_allocate,int start,int end,int room){
             this.class_to_allocate=class_to_allocate;
             this.start=start;
-            this.date=date;
             this.end=end;
             this.room=room;
         }
         @Override
         public void run(){
-            allocation_entry(class_to_allocate, start, end, date,room);
+            allocation_entry(class_to_allocate, start, end,room);
         }
     }
     
@@ -113,7 +111,7 @@ public class Room_allocation_for_a_class {
         System.out.println("The room no is:"+room_no);
         //creating the thread which will call the sychronized function for allocating the room
         try{
-            add_allocation thread1=new add_allocation(target_class, start, end,LocalDate.now().toString(),room_no);
+            add_allocation thread1=new add_allocation(target_class, start, end,room_no);
             thread1.start();
             System.out.println("The room allocation was successful.");
         }

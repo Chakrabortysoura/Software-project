@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.time.*"%>
+<%@ page import="com.first.software_project.Faculty"%>
+<%@ page import="com.first.software_project.Scheduled_class"%>
+<%@ page import="com.first.software_project.Subjects"%>
+<%@ page import="com.first.software_project.Room_allocation"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,38 +124,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                <% List<Room_allocation> class_list= (List<Room_allocation>)request.getAttribute("class_report");
+                   for(Room_allocation i:class_list){
+                %>
                     <tr>
-                        <td>101</td>
-                        <td>Data Structures</td>
-                        <td>Dr. John Doe</td>
-                        <td>A</td>
-                        <td>09:00 AM - 10:30 AM</td>
-                        <td>Monday, Wednesday, Friday</td>
+                        <td><%=i.getroom_no()%></td>
+                        <td><%=i.getassigned_class().gettopic().getsubject_name()%></td>
+                        <td><%=i.getassigned_class().getteacher().getname()%></td>
+                        <td><%=i.getassigned_class().getbatch()%></td>
+                        <td><%=i.getstarting_time()%>AM - <%=i.getending_time()%>AM</td>
+                        <td><%=i.getdate()%></td>
                     </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>Algorithms</td>
-                        <td>Prof. Jane Smith</td>
-                        <td>B</td>
-                        <td>10:45 AM - 12:15 PM</td>
-                        <td>Tuesday, Thursday</td>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td>Database Systems</td>
-                        <td>Dr. Emily Clark</td>
-                        <td>C</td>
-                        <td>01:00 PM - 02:30 PM</td>
-                        <td>Monday, Wednesday, Friday</td>
-                    </tr>
-                    <tr>
-                        <td>104</td>
-                        <td>Operating Systems</td>
-                        <td>Prof. Michael Brown</td>
-                        <td>D</td>
-                        <td>02:45 PM - 04:15 PM</td>
-                        <td>Tuesday, Thursday</td>
-                    </tr>
+                <%}%>
                 </tbody>
             </table>
 
@@ -173,33 +161,6 @@
                         <td>09:00 AM - 10:30 AM</td>
                         <td>11:00 AM - 12:30 PM</td>
                         <td>Rescheduled</td>
-                    </tr>
-                    <tr>
-                        <td>202</td>
-                        <td>Network Security</td>
-                        <td>Prof. Linda Green</td>
-                        <td>B</td>
-                        <td>10:45 AM - 12:15 PM</td>
-                        <td>N/A</td>
-                        <td>Canceled</td>
-                    </tr>
-                    <tr>
-                        <td>203</td>
-                        <td>Machine Learning</td>
-                        <td>Dr. Peter Parker</td>
-                        <td>C</td>
-                        <td>01:00 PM - 02:30 PM</td>
-                        <td>03:00 PM - 04:30 PM</td>
-                        <td>Rescheduled</td>
-                    </tr>
-                    <tr>
-                        <td>204</td>
-                        <td>Artificial Intelligence</td>
-                        <td>Prof. Mary Johnson</td>
-                        <td>D</td>
-                        <td>02:45 PM - 04:15 PM</td>
-                        <td>N/A</td>
-                        <td>Canceled</td>
                     </tr>
                 </tbody>
             </table>

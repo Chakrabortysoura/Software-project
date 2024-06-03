@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
 <%@ page import="com.first.software_project.Scheduled_class"%>
 <%@ page import="com.first.software_project.Faculty"%>
 <%@ page import="com.first.software_project.Subjects"%>
@@ -61,7 +60,7 @@ body {
 <body>
     <div id="heading">Today's Classes</div>
     <% List<Scheduled_class> class_list = (List<Scheduled_class>) request.getAttribute("class_list");
-        boolean[] checklist = (boolean[]) request.getAttribute("allocation_checklist");
+        int[] checklist = (int[]) request.getAttribute("allocation_checklist");
         if (class_list == null) { %>
             <div class="classes">There are no classes today.</div>
     <% } else {
@@ -72,9 +71,10 @@ body {
                         <div>Faculty<br><%= class_list.get(i).getteacher().getname() %></div>
                         <div>Start_Time<br><%= class_list.get(i).getstart() %></div>
                         <div>End_Time<br><%= class_list.get(i).getend() %></div>
-                        <div class="<%= checklist[i] ? "allocated" : "not-allocated" %>">
-                            <%= checklist[i] ? "Already Allocated" : "Not allocated yet" %>
-                        </div>
+                        <%if(checklist[i]==-1){%>
+                            <div>Not Allocated</div>
+                        <%} else{ %>
+                        <div>Room Allocated <%=checklist[i]%> </div> <%}%>
                     </div>
                 </div>
         <% }

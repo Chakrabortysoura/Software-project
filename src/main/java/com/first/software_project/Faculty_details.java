@@ -37,7 +37,7 @@ public class Faculty_details {
             Allocation_done temp=new Allocation_done();
             temp.setclass_id(i.getclass_id());
             // if(Faculty_page.check_allocated_or_not(i, LocalDate.now().toString())){
-            temp.setallocation_done(Faculty_page.check_allocated_or_not(i, LocalDate.now().toString())); 
+            temp.setallocation_done(Faculty_page.check_allocated_or_not(i, LocalDate.now())); 
             // }
             result_list.add(temp);
         }
