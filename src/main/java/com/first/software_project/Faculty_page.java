@@ -114,37 +114,39 @@ public class Faculty_page {
         
         return true;
     }
-    @RequestMapping("/")
-    public String login(){
-        System.out.println("This is the login page.");
-        return "login";
-    }
     @RequestMapping("/faculty_home_page")
     public String faculty_home(@RequestParam("id") int teacher_id,@RequestParam("day") String day_of_week,HttpSession s1){
+        // if(s1.getAttribute("class_list")!=null && s1.getAttribute("allocation_checklist")!=null){
+        //     List<Scheduled_class> class_list=(List<Scheduled_class>)s1.getAttribute("class_list");
+        //     Allocation_done[] checklist=(Allocation_done[])s1.getAttribute("allocation_checklist");
+        // }
+        if(s1.getAttribute("class_list")==null && s1.getAttribute("allocation_checklist")==null){
+            System.out.println("The method worked hard");
+            // String current_date=LocalDate.now().toString();
+            Faculty teacher=search_faculty(teacher_id);
+            //search for all the classes for the faculty on that day
+            // and get the teachers details from searching by the teacher's id
         
-        // String current_date=LocalDate.now().toString();
-        Faculty teacher=search_faculty(teacher_id);
-        //search for all the classes for the faculty on that day
-        // and get the teachers details from searching by the teacher's id
-        
-        List<Scheduled_class> today_classes=class_on_specific_day(teacher, day_of_week);
-        day_of_week=day_of_week.substring(0,3);
+            List<Scheduled_class> today_classes=class_on_specific_day(teacher, day_of_week);
+            day_of_week=day_of_week.substring(0,3);
 
-        //set all this data after being fetched in the session object
-        s1.setAttribute("day_of_week", day_of_week);
-        s1.setAttribute("faculty_details", teacher);
-        s1.setAttribute("class_list", today_classes);
+            //set all this data after being fetched in the session object
+            s1.setAttribute("day_of_week", day_of_week);
+            s1.setAttribute("faculty_details", teacher);
+            s1.setAttribute("class_list", today_classes);
         
-        // check how many of the classes have already assigned classrooms
-        Allocation_done[] checklist=new Allocation_done[today_classes.size()];
-        for(int i=0;i<today_classes.size();i++){
-            checklist[i]=new Allocation_done();
-            // if(check_allocated_or_not(today_classes.get(i), current_date)){
+            // check how many of the classes have already assigned classrooms
+            Allocation_done[] checklist=new Allocation_done[today_classes.size()];
+            for(int i=0;i<today_classes.size();i++){
+                checklist[i]=new Allocation_done();
+                // if(check_allocated_or_not(today_classes.get(i), current_date)){
+                checklist[i].setclass_id(today_classes.get(i).getclass_id());
                 checklist[i].setallocation_done(check_allocated_or_not(today_classes.get(i), LocalDate.now()));
-            // }
+                // }
+            }
+            //saving the checklist in the session object
+            s1.setAttribute("allocation_checklist", checklist);
         }
-        //saving the checklist in the session object
-        s1.setAttribute("allocation_checklist", checklist);
         
         return "faculty_home";
     }

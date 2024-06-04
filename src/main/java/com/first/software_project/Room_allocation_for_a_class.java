@@ -16,16 +16,16 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class Room_allocation_for_a_class {
-    public static List<Rooms> check_room(int start,int end){
+    public static List<Rooms> check_room(int start,int end,LocalDate date){
         Configuration config=new Configuration().configure();
         SessionFactory sessionbuilder=config.buildSessionFactory();
         Session s1=sessionbuilder.openSession();
         s1.beginTransaction();
 
-        NativeQuery<Rooms> search=s1.createNativeQuery("select * from `Rooms` WHERE room_no not in (select room_no from `Room_allocation` where (starting_time>=:start and starting_time<:end ) OR (ending_time>=:start and ending_time<:end))",Rooms.class);
+        NativeQuery<Rooms> search=s1.createNativeQuery("select * from `Rooms` WHERE room_no not in (select room_no from `Room_allocation` where (starting_time>=:start and starting_time<:end ) OR (ending_time>=:start and ending_time<:end) AND today_date=:date)",Rooms.class);
         List<Rooms> list_of_rooms=null;
         try{
-            search.setParameter("start", start).setParameter("end",end);
+            search.setParameter("start", start).setParameter("end",end).setParameter("date", date);
             list_of_rooms=search.getResultList();
             return list_of_rooms;    
         }
@@ -90,7 +90,7 @@ public class Room_allocation_for_a_class {
         int end=target_class.getend();
 
         //search for available room
-        List<Rooms> available_rooms=check_room(start, end);
+        List<Rooms> available_rooms=check_room(start, end,LocalDate.now());
         //set the list of allocated room in the session object
         s1.setAttribute("rooms_list", available_rooms);
     
@@ -113,6 +113,14 @@ public class Room_allocation_for_a_class {
         try{
             add_allocation thread1=new add_allocation(target_class, start, end,room_no);
             thread1.start();
+            Allocation_done[] checklist=(Allocation_done[]) s1.getAttribute("allocation_checklist");
+            for(Allocation_done i:checklist){
+                if(i.getclass_id()==target_class.getclass_id()){
+                    i.setclass_id(target_class.getclass_id());
+                    i.setallocation_done(room_no);
+                    break;
+                }
+            }
             System.out.println("The room allocation was successful.");
         }
         catch(Exception e){
@@ -132,6 +140,6 @@ public class Room_allocation_for_a_class {
     @RequestMapping("/go_back_to_home")
     public String go_home_page(HttpSession  s1){
         int teacher_id=((Faculty)s1.getAttribute("faculty_details")).getfaculty_id();
-        return new String("redirect:/faculty_home_page?id="+teacher_id+"&day=FRIDAY");
+        return new String("redirect:/faculty_home_page?id="+teacher_id+"&day="+(String)s1.getAttribute("day_of_week"));
     }
 }
