@@ -116,10 +116,7 @@ public class Faculty_page {
     }
     @RequestMapping("/faculty_home_page")
     public String faculty_home(@RequestParam("id") int teacher_id,@RequestParam("day") String day_of_week,HttpSession s1){
-        // if(s1.getAttribute("class_list")!=null && s1.getAttribute("allocation_checklist")!=null){
-        //     List<Scheduled_class> class_list=(List<Scheduled_class>)s1.getAttribute("class_list");
-        //     Allocation_done[] checklist=(Allocation_done[])s1.getAttribute("allocation_checklist");
-        // }
+
         if(s1.getAttribute("class_list")==null && s1.getAttribute("allocation_checklist")==null){
             System.out.println("The method worked hard");
             // String current_date=LocalDate.now().toString();
@@ -139,10 +136,8 @@ public class Faculty_page {
             Allocation_done[] checklist=new Allocation_done[today_classes.size()];
             for(int i=0;i<today_classes.size();i++){
                 checklist[i]=new Allocation_done();
-                // if(check_allocated_or_not(today_classes.get(i), current_date)){
                 checklist[i].setclass_id(today_classes.get(i).getclass_id());
                 checklist[i].setallocation_done(check_allocated_or_not(today_classes.get(i), LocalDate.now()));
-                // }
             }
             //saving the checklist in the session object
             s1.setAttribute("allocation_checklist", checklist);
