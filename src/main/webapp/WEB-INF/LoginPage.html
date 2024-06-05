@@ -132,44 +132,45 @@
     <div class='log' id="login-section">
         <h2>Sign In</h2>
         <div class="radio-group">
-            <input type="radio" id="student-signin" name="signin" value="student" checked>
+            <input type="radio" id="student-signin" name="signin" value="student" onclick="typeselector()" checked>
             <label for="student-signin">Student</label>
 
-            <input type="radio" id="faculty-signin" name="signin" value="faculty">
+            <input type="radio" id="faculty-signin" name="signin" value="faculty" onclick="typeselector()">
             <label for="faculty-signin">Faculty</label>
         </div>
         <form action="/signin" method="post">
-            <label for="username">Username:</label>
+            <label for="username" id="username-field">Batch:</label>
             <input type="text" id="username" name="username" placeholder="Enter a valid username here" required>
+
+            <div id="password" style="display: none;">
+                <label for="pass1">Password:</label>
+                <input type="password" id="pass1" name="pass1" placeholder="Enter a strong password" required>
+            </div>
             
-            <label for="pass1">Password:</label>
-            <input type="password" id="pass1" name="pass1" placeholder="Enter a strong password" required>
-            
-            <input type="submit" value="Sign In">
+            <input type="submit" value="Student" id="student-sign-in" formaction=""> <input type="submit" value="Teacher" id="faculty-sign-in" style="display: none;" formaction="">
         </form>
         <hr>
     </div>
 
     <script>
-        document.getElementById('show-signup-form').addEventListener('click', function() {
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('registration-section').style.display = 'block';
-
-            if (document.getElementById('student-signup').checked) {
-                document.getElementById('registration-title').textContent = 'Student Registration';
-                document.getElementById('student-fields').style.display = 'block';
-                document.getElementById('faculty-fields').style.display = 'none';
-            } else if (document.getElementById('faculty-signup').checked) {
-                document.getElementById('registration-title').textContent = 'Faculty Registration';
-                document.getElementById('student-fields').style.display = 'none';
-                document.getElementById('faculty-fields').style.display = 'block';
+        function typeselector(){
+            var type=document.getElementsByName('signin');
+            var button1=document.getElementById('student-sign-in');
+            var button2=document.getElementById('faculty-sign-in');
+            var password_field=document.getElementById('password');
+            if(type[0].checked){
+                button2.style.display="none";
+                button1.style.display="";
+                password_field.style.display="none";
+                document.getElementById("username-field").innerText="Batch";
             }
-        });
-
-        document.getElementById('back-to-login').addEventListener('click', function() {
-            document.getElementById('login-section').style.display = 'block';
-            document.getElementById('registration-section').style.display = 'none';
-        });
+            else{
+                button2.style.display="";
+                button1.style.display="none";
+                password_field.style.display="";
+                document.getElementById("username-field").innerText="Username";
+            }
+        }
     </script>
 </body>
 </html>
