@@ -3,9 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty report</title>
+    <title>Faculty Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            margin: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+            color: #2c3e50;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1a252f;
+        }
+
+        .report {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+
+        .report h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .report p {
+            margin: 10px 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Faculty Report</h1>
+        <div id="facultyDetails">
+            <label for="facultyName">Name:</label>
+            <input type="text" id="facultyName"><br>
+            
+            <label for="facultyID">ID:</label>
+            <input type="text" id="facultyID"><br>
+            
+            <label for="department">Department:</label>
+            <input type="text" id="department"><br>
+            
+            <label for="contact">Contact:</label>
+            <input type="text" id="contact"><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email"><br>
+            
+            <label for="address">Address:</label>
+            <textarea id="address"></textarea><br>
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date"><br>
+            
+            <button onclick="generateReport()">Generate Report</button>
+        </div>
+        <div id="report" class="report">
+            <!-- Report content will be generated here -->
+        </div>
+    </div>
+
+    <script>
+        function generateReport() {
+            const name = document.getElementById('facultyName').value;
+            const id = document.getElementById('facultyID').value;
+            const department = document.getElementById('department').value;
+            const contact = document.getElementById('contact').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const date = document.getElementById('date').value;
+
+            const reportDiv = document.getElementById('report');
+            reportDiv.innerHTML = `
+                <h2>Faculty Report</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>ID:</strong> ${id}</p>
+                <p><strong>Department:</strong> ${department}</p>
+                <p><strong>Contact:</strong> ${contact}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Address:</strong> ${address}</p>
+                <p><strong>Date:</strong> ${date}</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Class Attendance</th>
+                            <th>Class Topic/Subject</th>
+                            <th>Class Timing</th>
+                            <th>Room No</th>
+                        </tr>
+                    </thead>
+                    <tbody id="classDetails">
+                        <tr>
+                            <td>25</td>
+                            <td>Mathematics</td>
+                            <td>10:00 - 11:00 AM</td>
+                            <td>101</td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>Physics</td>
+                            <td>11:00 - 12:00 PM</td>
+                            <td>102</td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>Chemistry</td>
+                            <td>1:00 - 2:00 PM</td>
+                            <td>103</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }
+    </script>
 </body>
 </html>
