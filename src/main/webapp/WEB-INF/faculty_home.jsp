@@ -29,25 +29,21 @@
         }
 
         .header, .date {
-            background-color: rgb(29, 92, 92);
+            background-color: #2c3e50;
             font-size: 22px;
             color: white;
             padding: 10px;
             border-radius: 8px;
             margin: 10px;
-        }
-
-        .header {
             display: inline-block;
         }
 
         .date {
-            display: inline-block;
             margin-left: 20px;
         }
 
         .class-container {
-            margin-top: 8px;
+            margin-top: 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
@@ -55,14 +51,15 @@
         }
 
         .class-box {
-            border: 2px solid brown;
-            height: 140px;
+            border: 2px solid #2c3e50;
+            height: 160px;
             border-radius: 8px;
             text-align: center;
-            padding-top: 52px;
-            background-color: rgb(255, 187, 153);
+            padding: 20px;
+            background-color: #ffffff;
             width: 22%;
             margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         form {
@@ -105,14 +102,14 @@
             for (int i = 0; i < list.size(); i++) {
         %>
         <div class="class-box">
-            Batch: <%= list.get(i).getbatch() %>
-            <br>Topic: <%= list.get(i).gettopic().getsubject_name() %>
-            <br>Starting time: <%= list.get(i).getstart() %>
-            <br>End time: <%= list.get(i).getend() %>
+            <p><strong>Batch:</strong> <%= list.get(i).getbatch() %></p>
+            <p><strong>Topic:</strong> <%= list.get(i).gettopic().getsubject_name() %></p>
+            <p><strong>Starting time:</strong> <%= list.get(i).getstart() %></p>
+            <p><strong>End time:</strong> <%= list.get(i).getend() %></p>
             <% if (checklist[i].getallocation_done() != -1) { %>
-                <br>Allocated Already At Room no: <%= checklist[i].getallocation_done() %>
+                <p><strong>Allocated Room:</strong> <%= checklist[i].getallocation_done() %></p>
             <% } else { %>
-                <br><span>Class Yet To Be Allocated a Room</span>
+                <p><strong>Status:</strong> <span>Class Yet To Be Allocated a Room</span></p>
                 <% session.setAttribute("class_to_allocate", list.get(i)); %>
                 <form action="/allocation_details">
                     <input type="submit" value="Allocate Room">
