@@ -1,151 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-/* styles.css */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #e9ecef;
-    margin: 0;
-    padding: 0;
-}
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 20px;
+        }
 
-.container {
-    max-width: 800px;
-    margin: 50px auto;
-    background: #ffffff;
-    padding: 20px 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
 
-h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 40px;
-    font-size: 2em;
-}
+        header h1 {
+            margin: 0;
+        }
 
-label {
-    display: block;
-    margin: 15px 0 5px;
-    color: #333;
-    font-weight: bold;
-}
+        .log, .sign-up {
+            padding: 20px;
+        }
 
-input[type="text"],
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1em;
-    background-color: #f9f9f9;
-}
+        .log h2, .sign-up h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+        }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-    border-color: #80bdff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
 
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
+        .radio-group input[type="radio"] {
+            margin: 0 10px;
+        }
 
-button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-    margin-top: 20px;
-}
+        .radio-group label {
+            margin: 0 10px;
+            font-weight: bold;
+            color: #333;
+        }
 
-button:hover {
-    background-color: #0056b3;
-}
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.report {
-    margin-top: 40px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #ffffff;
-}
+        form label {
+            width: 100%;
+            margin: 15px 0 5px;
+            color: #333;
+            font-weight: bold;
+        }
 
-.report h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
+        form input[type="text"],
+        form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+            background-color: #f9f9f9;
+        }
 
-.report p {
-    margin: 10px 0;
-    color: #555;
-    line-height: 1.6;
-}
+        form input[type="text"]:focus,
+        form input[type="password"]:focus {
+            border-color: #80bdff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
 
+        form input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #2c3e50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #1a252f;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        .toggle-link {
+            text-align: center;
+            cursor: pointer;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+
+        @media print {
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            header,
+            .footer {
+                page-break-before: always;
+                page-break-after: always;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <div class='log' id="login-section">
-        <h2>Sign In</h2>
-        <div class="radio-group">
-            <input type="radio" id="student-signin" name="signin" value="student" onclick="typeselector()" checked>
-            <label for="student-signin">Student</label>
+    <div class="container">
+        <header>
+            <h1>Login Page</h1>
+        </header>
+        <div class='log' id="login-section">
+            <h2>Sign In</h2>
+            <div class="radio-group">
+                <input type="radio" id="student-signin" name="signin" value="student" onclick="typeselector()" checked>
+                <label for="student-signin">Student</label>
 
-            <input type="radio" id="faculty-signin" name="signin" value="faculty" onclick="typeselector()">
-            <label for="faculty-signin">Faculty</label>
-        </div>
-        <form action="/signin" method="post">
-            <label for="username" id="username-field">Batch:</label>
-            <input type="text" id="username" name="username" placeholder="Enter a valid username here" required>
-
-            <div id="password" style="display: none;">
-                <label for="pass1">Password:</label>
-                <input type="password" id="pass1" name="pass1" placeholder="Enter a strong password" required>
+                <input type="radio" id="faculty-signin" name="signin" value="faculty" onclick="typeselector()">
+                <label for="faculty-signin">Faculty</label>
             </div>
-            
-            <input type="submit" value="Student" id="student-sign-in" formaction=""> <input type="submit" value="Teacher" id="faculty-sign-in" style="display: none;" formaction="">
-        </form>
-        <hr>
+            <form action="/signin" method="post">
+                <label for="username" id="username-field">Batch:</label>
+                <input type="text" id="username" name="username" placeholder="Enter a valid username here" required>
+
+                <div id="password" style="display: none;">
+                    <label for="pass1">Password:</label>
+                    <input type="password" id="pass1" name="pass1" placeholder="Enter a strong password" required>
+                </div>
+
+                <input type="submit" value="Student" id="student-sign-in" formaction="">
+                <input type="submit" value="Teacher" id="faculty-sign-in" style="display: none;" formaction="">
+            </form>
+            <div class="toggle-link" onclick="toggleSignUp()">New user? Sign up here</div>
+            <hr>
+        </div>
+        <div class='sign-up' id="signup-section" style="display: none;">
+            <h2>Sign Up</h2>
+            <div class="radio-group">
+                <input type="radio" id="student-signup" name="signup" value="student" onclick="signupselector()" checked>
+                <label for="student-signup">Student</label>
+
+                <input type="radio" id="faculty-signup" name="signup" value="faculty" onclick="signupselector()">
+                <label for="faculty-signup">Faculty</label>
+            </div>
+            <form action="/signup" method="post">
+                <label for="signup-username" id="signup-username-field">Batch:</label>
+                <input type="text" id="signup-username" name="signup-username" placeholder="Enter your batch here" required>
+
+                <label for="signup-pass1">Password:</label>
+                <input type="password" id="signup-pass1" name="signup-pass1" placeholder="Enter a strong password" required>
+
+                <label for="signup-pass2">Confirm Password:</label>
+                <input type="password" id="signup-pass2" name="signup-pass2" placeholder="Confirm your password" required>
+
+                <input type="submit" value="Sign Up as Student" id="student-sign-up" formaction="">
+                <input type="submit" value="Sign Up as Teacher" id="faculty-sign-up" style="display: none;" formaction="">
+            </form>
+            <div class="toggle-link" onclick="toggleSignUp()">Already have an account? Sign in here</div>
+            <hr>
+        </div>
     </div>
 
     <script>
-        function typeselector(){
-            var type=document.getElementsByName('signin');
-            var button1=document.getElementById('student-sign-in');
-            var button2=document.getElementById('faculty-sign-in');
-            var password_field=document.getElementById('password');
-            if(type[0].checked){
-                button2.style.display="none";
-                button1.style.display="";
-                password_field.style.display="none";
-                document.getElementById("username-field").innerText="Batch";
+        function typeselector() {
+            var type = document.getElementsByName('signin');
+            var button1 = document.getElementById('student-sign-in');
+            var button2 = document.getElementById('faculty-sign-in');
+            var password_field = document.getElementById('password');
+            if (type[0].checked) {
+                button2.style.display = "none";
+                button1.style.display = "";
+                password_field.style.display = "none";
+                document.getElementById("username-field").innerText = "Batch";
+            } else {
+                button2.style.display = "";
+                button1.style.display = "none";
+                password_field.style.display = "";
+                document.getElementById("username-field").innerText = "Username";
             }
-            else{
-                button2.style.display="";
-                button1.style.display="none";
-                password_field.style.display="";
-                document.getElementById("username-field").innerText="Username";
+        }
+
+        function signupselector() {
+            var type = document.getElementsByName('signup');
+            var button1 = document.getElementById('student-sign-up');
+            var button2 = document.getElementById('faculty-sign-up');
+            if (type[0].checked) {
+                button2.style.display = "none";
+                button1.style.display = "";
+                document.getElementById("signup-username-field").innerText = "Batch";
+            } else {
+                button2.style.display = "";
+                button1.style.display = "none";
+                document.getElementById("signup-username-field").innerText = "Username";
+            }
+        }
+
+        function toggleSignUp() {
+            var loginSection = document.getElementById('login-section');
+            var signupSection = document.getElementById('signup-section');
+            if (loginSection.style.display === 'none') {
+                loginSection.style.display = 'block';
+                signupSection.style.display = 'none';
+            } else {
+                loginSection.style.display = 'none';
+                signupSection.style.display = 'block';
             }
         }
     </script>
 </body>
+
 </html>
