@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Course Selection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .course-selection {
+            padding: 20px;
+        }
+
+        .course-selection h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form label {
+            width: 100%;
+            margin: 15px 0 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+            background-color: #f9f9f9;
+        }
+
+        form select:focus {
+            border-color: #80bdff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        form input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #2c3e50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #1a252f;
+        }
+
+        @media print {
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            header,
+            .footer {
+                page-break-before: always;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Course Selection</h1>
+        </header>
+        <div class="course-selection">
+            <h2>Select Your Course</h2>
+            <form action="/submit_course_selection" method="post">
+                <label for="course-name">Course Name:</label>
+                <select id="course-name" name="course-name" onchange="populateSpecializations()" required>
+                    <option value="">Select Course</option>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="BSc(H)">BSc(H)</option>
+                    <option value="BBA">BBA</option>
+                    <option value="BE">BE</option>
+                    <option value="MBA">MBA</option>
+                </select>
+
+                <label for="specialization">Specialization:</label>
+                <select id="specialization" name="specialization" required>
+                    <option value="">Select Specialization</option>
+                </select>
+
+                <label for="batch">Batch:</label>
+                <select id="batch" name="batch" required>
+                    <option value="">Select Batch</option>
+                    <option value="Section A">Section A</option>
+                    <option value="Section B">Section B</option>
+                    <option value="Section C">Section C</option>
+                    <option value="Section D">Section D</option>
+                    <option value="Section E">Section E</option>
+                </select>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function populateSpecializations() {
+            var courseName = document.getElementById("course-name").value;
+            var specialization = document.getElementById("specialization");
+            specialization.innerHTML = ""; // Clear previous options
+
+            var specializations = {
+                "B.Tech": ["CSE", "CSEAI", "ME", "ECE", "EE"],
+                "BSc(H)": ["Maths", "Physics", "Chemistry"],
+                "BBA": ["Finance", "Marketing", "HR"],
+                "BE": ["Civil", "Mechanical", "Electrical"],
+                "MBA": ["Finance", "Marketing", "HR"]
+            };
+
+            if (courseName in specializations) {
+                specializations[courseName].forEach(function (spec) {
+                    var option = document.createElement("option");
+                    option.value = spec;
+                    option.text = spec;
+                    specialization.appendChild(option);
+                });
+            } else {
+                var option = document.createElement("option");
+                option.value = "";
+                option.text = "Select Specialization";
+                specialization.appendChild(option);
+            }
+        }
+    </script>
+</body>
+
+</html>
