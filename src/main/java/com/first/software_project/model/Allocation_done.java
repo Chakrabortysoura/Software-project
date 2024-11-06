@@ -1,4 +1,4 @@
-package com.first.software_project;
+package com.first.software_project.model;
 
 public class Allocation_done {
     private int class_id;
