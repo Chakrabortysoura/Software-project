@@ -69,4 +69,25 @@ public class AdminService {
         }
         return null;
     }
+    public Faculty getPreviousHod(String dept){
+        return facultyRepo.findFacultyByDepartmentAndHod(dept, true);
+    }
+    public boolean removeHod(String dept){
+        try{
+           facultyRepo.removeHod(dept);
+           return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    public Faculty updateHod(int id, String department){
+        try{
+            facultyRepo.assignHod(id);
+            return facultyRepo.findById(id).orElse(null);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

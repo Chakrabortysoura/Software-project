@@ -35,4 +35,15 @@ public class AdminController {
         Faculty faculty= new Faculty(name, department, hod, new User("Faculty", password));
         return adminService.updateFacultyDetails(faculty);
     }
+    @GetMapping(path="/get/hod/{dept}")
+    public Faculty getHod(@PathVariable String dept){
+        return adminService.getPreviousHod(dept);
+    }
+    @PostMapping(path="/update/hod")
+    public Faculty updateHod(@RequestParam int id, @RequestParam String dept){
+        if(adminService.removeHod(dept)){
+            return adminService.updateHod(id, dept);
+        }
+        return null;
+    }
 }
