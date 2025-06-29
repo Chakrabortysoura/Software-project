@@ -83,8 +83,12 @@ public class AdminService {
     }
     public Faculty updateHod(int id, String department){
         try{
-            facultyRepo.assignHod(id);
-            return facultyRepo.findById(id).orElse(null);
+            if(removeHod(department)) {
+                facultyRepo.assignHod(id);
+                return facultyRepo.findById(id).orElse(null);
+            }else{
+                return null;
+            }
         }catch (Exception e){
             System.out.println(e.getMessage());
             return null;
