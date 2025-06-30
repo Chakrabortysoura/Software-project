@@ -13,6 +13,11 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+    @GetMapping("/ping")
+    public String getMethodName() {
+        return new String("Testing OK");
+    }
+
     @PostMapping(path = "/create/adminuser")
     public Administration createAdmin(@RequestParam String name,@RequestParam String designation, @RequestParam String password) {
         Administration administration = new Administration(name, designation, new User("Admin", password));
