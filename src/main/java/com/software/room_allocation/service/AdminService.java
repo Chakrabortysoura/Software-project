@@ -1,10 +1,8 @@
 package com.software.room_allocation.service;
 
 import com.software.room_allocation.model.Administration;
-import com.software.room_allocation.model.Faculty;
 import com.software.room_allocation.model.User;
 import com.software.room_allocation.repository.AdminRepository;
-import com.software.room_allocation.repository.FacultyRepository;
 import com.software.room_allocation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +13,7 @@ public class AdminService {
     AdminRepository adminRepo;
     @Autowired
     UserRepository userRepo;
-    @Autowired
-    FacultyRepository facultyRepo;
+
     public Administration findAdmin(int id) {
         try{
             return adminRepo.findById(id).orElse(null);
