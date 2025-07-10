@@ -19,7 +19,7 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     FacultyService facultyService;
-
+    
     @PostMapping(path = "/create/adminuser")
     public ResponseEntity<Administration> createAdmin(@RequestParam String name, @RequestParam String admindesignation, @RequestParam String password) {
         // Endpoint for creating new users with the Admin authority in the database.
