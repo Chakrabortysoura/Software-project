@@ -34,13 +34,21 @@ public class FacultyService {
         }
         return null;
     }
-    public Faculty updateFacultyDetails(Faculty newfaculty) {
+    public Faculty updateFacultyDetails(int facultyid, String  newname, String newpassword, String newdepartment) {
         try{
-            return facultyRepo.save(newfaculty);
+            Faculty originalfacultyuser= facultyRepo.findById(facultyid).orElse(null);
+            if(originalfacultyuser==null) {
+                return null;
+            }
+            originalfacultyuser.setName(newname);
+            originalfacultyuser.setDepartment(newdepartment);
+            originalfacultyuser.getUserdetails().setPassword(newpassword); //Update the details of the original faculty user with the newly provided details
+
+            return facultyRepo.save(originalfacultyuser);
         }catch(Exception e){
             System.out.println(e.getMessage());
+            return null;
         }
-        return null;
     }
     public Faculty getPreviousHod(String dept){
         return facultyRepo.findFacultyByDepartmentAndHod(dept, true);

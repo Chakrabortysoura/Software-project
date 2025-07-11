@@ -45,13 +45,20 @@ public class AdminService {
        }
        return null;
     }
-    public Administration updateAdminDetails(Administration newadmin) {
+    public Administration updateAdminDetails(int adminid, String newname, String newadmindesignation, String newpassword) {
         try{
-           return adminRepo.save(newadmin);
+            Administration originaladminuser= adminRepo.findById(adminid).orElse(null);
+            if(originaladminuser==null) {
+                return null;
+            }
+            originaladminuser.setEmployee_name(newname);
+            originaladminuser.setDesignation(newadmindesignation);
+            originaladminuser.getUserdetails().setPassword(newpassword); // Update all the parameters of the original admin user to save
+            return adminRepo.save(originaladminuser);
         }catch(Exception e){
             System.out.println(e.getMessage());
+            return null;
         }
-        return null;
     }
     public boolean deleteAdmin(int id) {
         try{

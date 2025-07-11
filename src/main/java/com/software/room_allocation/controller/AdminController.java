@@ -47,29 +47,41 @@ public class AdminController {
     }
 
     @PostMapping(path = "/update/adminuser")
-    public ResponseEntity<Administration> updateAdmin(@RequestParam String name,@RequestParam String admindesignation, @RequestParam String password) {
-        // Endpooint for updating user details for any admin user.
-        // This endpoint takes all the same parameters as the admin creation endpoint. This endpoint updates the newly sent parameters for the admin user.
-        if(name.compareTo("")==0||password.compareTo("")==0||admindesignation.compareTo("")==0){
+    public ResponseEntity<Administration> updateAdmin(HttpSession session, @RequestParam String requestsenderpassword, @RequestParam int adminid, @RequestParam String newname,@RequestParam String newadmindesignation, @RequestParam String newpassword) {
+        // Endpoint for updating user details for any admin user.
+        // This endpoint takes all the data about the admin user that can be updates along with the password of the logged in admin user.
+        // This endpoint updates the newly sent parameters for the admin user.
+
+        Administration loggedinuser= (Administration)  session.getAttribute("user");
+        if(requestsenderpassword.compareTo(loggedinuser.getUserdetails().getPassword())!=0){
+           return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        if(newname.compareTo("")==0|| newpassword.compareTo("")==0||newadmindesignation.compareTo("")==0){
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
-        Administration updatedadministration = new Administration(name, admindesignation, new User("A", password));
-        updatedadministration= adminService.updateAdminDetails(updatedadministration);
-        if(updatedadministration==null){
+        Administration updatedadminuser= adminService.updateAdminDetails(adminid, newname, newadmindesignation, newpassword);
+        if(updatedadminuser==null){
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
-        return new ResponseEntity<>(updatedadministration, HttpStatus.OK);
+        if(loggedinuser.getEmployee_id()==updatedadminuser.getEmployee_id()){ // Updates the session data for the loggedin user if the same adminuser is being updated
+            session.setAttribute("user",updatedadminuser);
+        }
+        return new ResponseEntity<>(updatedadminuser, HttpStatus.OK);
     }
 
     @PostMapping(path = "/update/facultyuser")
-    public ResponseEntity<Faculty> updateFaculty(@RequestParam String name, @RequestParam String password, @RequestParam String department, @RequestParam boolean hod) {
+    public ResponseEntity<Faculty> updateFaculty(HttpSession session, @RequestParam String requestsenderpassword, @RequestParam int facultyid, @RequestParam String newname, @RequestParam String newpassword, @RequestParam String newdepartment) {
         // Endpooint for updating user details for any faculty user.
         // This endpoint takes all the same parameters as the faculty creation endpoint. This endpoint updates the newly sent parameters for the faculty user.
-        if(name.compareTo("")==0||password.compareTo("")==0||department.compareTo("")==0){
+
+        Administration loggedinuser= (Administration)  session.getAttribute("user");
+        if(loggedinuser.getUserdetails().getPassword().compareTo(requestsenderpassword)!=0){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        if(newname.compareTo("")==0||newpassword.compareTo("")==0||newdepartment.compareTo("")==0){
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
-        Faculty updatedfaculty= new Faculty(name, department, hod, new User("F", password));
-        updatedfaculty= facultyService.updateFacultyDetails(updatedfaculty);
+        Faculty updatedfaculty= facultyService.updateFacultyDetails(facultyid, newname, newpassword, newdepartment);
         if(updatedfaculty==null){
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
@@ -81,6 +93,7 @@ public class AdminController {
         // Delete an adminuser from the database.
         // Along with adminid for the user to be deleted password for the currently logged user in is another parameter for this endpoint
         Administration requestsender= (Administration) session.getAttribute("user");
+        System.out.println("User from the session token: "+requestsender);
         if(password.compareTo(requestsender.getUserdetails().getPassword())==0){
             if(adminService.deleteAdmin(adminid)){
                 return new ResponseEntity<>(true,HttpStatus.OK);

@@ -20,7 +20,7 @@ public class HomeController {
 
     @GetMapping(path = "/login/admin")
     public void getAdmin(HttpSession session, @RequestParam int adminid){
-        Administration user= (Administration) adminService.findAdmin(adminid);
+        Administration user= adminService.findAdmin(adminid);
         session.setAttribute("user",user);
     }
 }
